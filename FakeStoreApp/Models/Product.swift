@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Product: Codable, Identifiable {
+struct Product: Codable, Identifiable, Equatable {
     let id: Int
     let title: String
     let price: Double
@@ -16,8 +16,13 @@ struct Product: Codable, Identifiable {
     let image: String
     let rating: Rating
     
-    struct Rating: Codable {
+    struct Rating: Codable, Equatable {
         let rate: Double
         let count: Int
+    }
+    
+    // Implement Equatable conformance (not strictly needed since all properties are Equatable)
+    static func == (lhs: Product, rhs: Product) -> Bool {
+        return lhs.id == rhs.id
     }
 }

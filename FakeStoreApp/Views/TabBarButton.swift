@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct TabBarButton: View {
+    let icon: String
+    let title: String
+    let isSelected: Bool
+    let action: () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: action) {
+            VStack {
+                Image(systemName: icon)
+                    .font(.system(size: 24))
+                    .foregroundColor(isSelected ? .blue : .gray)
+                
+                Text(title)
+                    .font(.caption)
+                    .foregroundColor(isSelected ? .blue : .gray)
+            }
+            .frame(maxWidth: .infinity)
+        }
     }
 }
 
-#Preview {
-    TabBarButton()
+struct TabBarButton_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            TabBarButton(icon: "house", title: "Home", isSelected: true, action: {})
+                .previewDisplayName("Selected")
+            TabBarButton(icon: "cart", title: "Cart", isSelected: false, action: {})
+                .previewDisplayName("Not Selected")
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
+    }
 }

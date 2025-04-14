@@ -7,8 +7,15 @@
 
 import Foundation
 
-struct CartItem: Identifiable {
+struct CartItem: Identifiable, Equatable {
     let id = UUID()
     let product: Product
     var quantity: Int
+    
+    // Implement Equatable conformance
+    static func == (lhs: CartItem, rhs: CartItem) -> Bool {
+        return lhs.id == rhs.id &&
+               lhs.product.id == rhs.product.id &&
+               lhs.quantity == rhs.quantity
+    }
 }

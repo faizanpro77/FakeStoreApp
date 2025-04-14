@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct FakeStoreAppApp: App {
+    @StateObject private var viewModel = ProductListViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                ProductListView()
+                    .environmentObject(viewModel)
+            }
+            .navigationViewStyle(.stack) // Important for iOS
         }
     }
 }
